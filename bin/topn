@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+
+fs.readFile(process.argv[2], function(err, raw_data) {
+  if (err) throw err;
+
+  var data = JSON.parse(raw_data);
+  var ranked = Object.keys(data).map(function(i) { return { rank: data[i], url: i } });
+
+  var from = parseInt(process.argv[3] || 0);
+  var to = (process.argv[4]) ? parseInt(process.argv[4]) : from + 25;
+
+  console.log(ranked.sort(function(a, b) { return b.rank - a.rank }).slice(from, to));
+});
