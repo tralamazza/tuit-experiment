@@ -13,5 +13,6 @@ var credentials = require('./credentials');
   server.start({
     port: 80,
     credentials: credentials,
-    track: [ 'http', 'https' ]
+    track: [ 'http', 'https' ],
+    cache_size: 100000
   });
